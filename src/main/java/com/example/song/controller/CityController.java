@@ -1,6 +1,6 @@
 package com.example.song.controller;
 
-import com.example.song.domain.City;
+import com.example.song.entity.CityEntity;
 import com.example.song.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,8 +24,8 @@ public class CityController {
 
     @RequestMapping(value = "/web/city", method = RequestMethod.GET)
     public String findAllCity(Model model) {
-        List<City> cityList = cityService.findAllCity();
-        model.addAttribute("cityList", cityList);
-        return "cityList";
+        List<CityEntity> cityEntityList = cityService.findAllCity();
+        model.addAttribute("cityEntityList", cityEntityList);
+        return "cityEntityList";
     }
 }

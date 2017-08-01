@@ -1,6 +1,6 @@
 package com.example.song.service;
 
-import com.example.song.domain.City;
+import com.example.song.entity.CityEntity;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ public interface CityService {
      *
      * @return
      */
-    List<City> findAllCity();
+    List<CityEntity> findAllCity();
 
     /**
      * 根据城市 ID,查询城市信息
@@ -18,23 +18,23 @@ public interface CityService {
      * @param id
      * @return
      */
-    City findCityById(int id);
+    CityEntity findCityById(int id);
 
     /**
      * 新增城市信息
      *
-     * @param city
+     * @param cityEntity
      * @return
      */
-    void saveCity(City city);
+    void saveCity(CityEntity cityEntity);
 
     /**
      * 更新城市信息
      *
-     * @param city
+     * @param cityEntity
      * @return
      */
-    void updateCity(City city);
+    void updateCity(CityEntity cityEntity);
 
     /**
      * 根据城市 ID,删除城市信息

@@ -1,4 +1,4 @@
-package com.example.song.domain;
+package com.example.song.entity;
 
 import com.alibaba.fastjson.JSON;
 
@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "city")
-public class City {
+public class CityEntity {
     @Override
     public String toString() {
         return JSON.toJSONString(this);

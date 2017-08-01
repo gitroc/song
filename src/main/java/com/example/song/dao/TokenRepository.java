@@ -1,6 +1,6 @@
 package com.example.song.dao;
 
-import com.example.song.domain.TokenEntity;
+import com.example.song.entity.TokenEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

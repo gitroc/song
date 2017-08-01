@@ -1,7 +1,7 @@
 package com.example.song.controller;
 
-import com.example.song.domain.HomeProperties;
-import com.example.song.domain.UserProperties;
+import com.example.song.entity.HomeEntity;
+import com.example.song.entity.UserEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,13 +10,13 @@ import javax.annotation.Resource;
 @RestController
 public class HelloWorldController {
     @Resource
-    private HomeProperties homeProperties;
+    private HomeEntity homeEntity;
 
     @Resource
-    private UserProperties userProperties;
+    private UserEntity userEntity;
 
     @RequestMapping(value = "/")
     public String sayHello() {
-        return homeProperties.toString() + userProperties.toString();
+        return homeEntity.toString() + userEntity.toString();
     }
 }

@@ -1,8 +1,8 @@
 package com.example.song.aop;
 
 import com.alibaba.fastjson.JSON;
-import com.example.song.constant.ResultCode;
-import com.example.song.domain.JsonResult;
+import com.example.song.base.BaseErrorInterfaceInfo;
+import com.example.song.base.BaseRspEntity;
 import com.example.song.service.TokenService;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -48,7 +48,7 @@ public class SongAspect {
             if (null != tokenService.getToken(request.getHeader("token"))) {
                 logger.info("登录成功");
             }
-            result = new JsonResult(ResultCode.NOT_LOGIN, "登录失败");
+            result = new BaseRspEntity(BaseErrorInterfaceInfo.NOT_LOGIN);
         }
 
         try {
@@ -58,7 +58,7 @@ public class SongAspect {
             }
         } catch (Throwable e) {
             logger.info("exception: ", e);
-            result = new JsonResult(ResultCode.EXCEPTION, "发生异常", e.getMessage());
+            result = new BaseRspEntity(BaseErrorInterfaceInfo.EXCEPTION);
         }
 
         return result;
@@ -83,7 +83,7 @@ public class SongAspect {
     @AfterReturning(returning = "ret", pointcut = "song()")
     public void doAfterReturning(Object ret) throws Throwable {
         // 处理完请求，返回内容
-        JsonResult result = (JsonResult) ret;
+        BaseRspEntity result = (BaseRspEntity) ret;
         logger.info("返回码    :" + result.getCode());
         logger.info("返回消息  :" + result.getMessage());
         if (null != result.getResult()) {

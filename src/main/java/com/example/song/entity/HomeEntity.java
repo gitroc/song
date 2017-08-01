@@ -1,4 +1,4 @@
-package com.example.song.domain;
+package com.example.song.entity;
 
 import com.alibaba.fastjson.JSON;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @ConfigurationProperties(prefix = "home")
-public class HomeProperties {
+public class HomeEntity {
     @Override
     public String toString() {
         return JSON.toJSONString(this);
