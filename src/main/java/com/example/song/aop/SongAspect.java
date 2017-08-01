@@ -58,7 +58,7 @@ public class SongAspect {
             }
         } catch (Throwable e) {
             logger.info("exception: ", e);
-            result = new BaseRspEntity(BaseErrorInterfaceInfo.EXCEPTION);
+            result = new BaseRspEntity(e);
         }
 
         return result;

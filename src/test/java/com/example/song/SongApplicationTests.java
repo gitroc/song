@@ -1,5 +1,7 @@
 package com.example.song;
 
+import com.example.song.base.BaseErrorInterfaceInfo;
+import com.example.song.base.BaseException;
 import com.example.song.controller.HelloWorldController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,13 +14,17 @@ import static org.junit.Assert.assertEquals;
 @SpringBootTest
 public class SongApplicationTests {
 
-	@Test
-	public void contextLoads() {
-	}
+    @Test
+    public void contextLoads() {
+    }
 
-	@Test
-	public void testSayHello() {
-		assertEquals("Hello,World!",new HelloWorldController().sayHello());
-	}
+    @Test
+    public void testSayHello() throws BaseException{
+        try {
+            assertEquals("Hello,World!", new HelloWorldController().sayHello());
+        } catch (Exception e) {
+            throw new BaseException(BaseErrorInterfaceInfo.EXCEPTION);
+        }
+    }
 
 }
