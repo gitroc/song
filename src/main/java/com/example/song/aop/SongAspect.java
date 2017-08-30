@@ -84,10 +84,13 @@ public class SongAspect {
     public void doAfterReturning(Object ret) throws Throwable {
         // 处理完请求，返回内容
         BaseRspEntity result = (BaseRspEntity) ret;
-        logger.info("返回码    :" + result.getCode());
-        logger.info("返回消息  :" + result.getMessage());
-        if (null != result.getResult()) {
-            logger.info("返回内容 : " + ret);
+
+        if (null != result) {
+            logger.info("返回码    :" + result.getCode());
+            logger.info("返回消息  :" + result.getMessage());
+            if (null != result.getResult()) {
+                logger.info("返回内容 : " + ret);
+            }
         }
 
         logger.info("消耗时间 : " + (System.currentTimeMillis() - startTime.get()) + "毫秒");
