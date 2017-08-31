@@ -1,10 +1,9 @@
 package com.example.song.service;
 
 import com.example.song.entity.CompanyEntity;
-import com.example.song.entity.CompanyListEntity;
 
 public interface CompanyService {
-    CompanyListEntity findAll();
+    Iterable<CompanyEntity> findAll();
 
     CompanyEntity findById(int id);
 

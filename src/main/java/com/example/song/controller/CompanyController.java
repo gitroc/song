@@ -1,6 +1,5 @@
 package com.example.song.controller;
 
-import com.example.song.base.BaseErrorInterfaceInfo;
 import com.example.song.base.BaseException;
 import com.example.song.base.BaseRspEntity;
 import com.example.song.entity.CompanyEntity;

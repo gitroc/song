@@ -2,27 +2,27 @@ package com.example.song.service.impl;
 
 import com.example.song.dao.CompanyRepository;
 import com.example.song.entity.CompanyEntity;
-import com.example.song.entity.CompanyListEntity;
 import com.example.song.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
 
-
-@Component
+@Service
+@CacheConfig(cacheNames = "company")
 public class CompanyServiceImpl implements CompanyService {
     @Autowired
     private CompanyRepository companyRepository;
 
     @Override
-    public CompanyListEntity findAll() {
-        CompanyListEntity listEntity = new CompanyListEntity();
-        listEntity.setList((List<CompanyEntity>) companyRepository.findAll());
-        return listEntity;
+    @Cacheable
+    public Iterable<CompanyEntity> findAll() {
+        return companyRepository.findAll();
     }
 
     @Override
+    @Cacheable
     public CompanyEntity findById(int id) {
         return companyRepository.findOne(id);
     }
