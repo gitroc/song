@@ -4,11 +4,11 @@ import com.example.song.dao.CityRepository;
 import com.example.song.entity.CityEntity;
 import com.example.song.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
+@Service
 public class CityServiceImpl implements CityService {
     @Autowired
     private CityRepository cityRepository;

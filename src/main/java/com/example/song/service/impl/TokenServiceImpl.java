@@ -4,9 +4,9 @@ import com.example.song.dao.TokenRepository;
 import com.example.song.entity.TokenEntity;
 import com.example.song.service.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class TokenServiceImpl implements TokenService {
     @Autowired
     private TokenRepository tokenRepository;

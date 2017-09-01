@@ -5,6 +5,7 @@ import com.example.song.entity.CompanyEntity;
 import com.example.song.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -16,28 +17,31 @@ public class CompanyServiceImpl implements CompanyService {
     private CompanyRepository companyRepository;
 
     @Override
-    @Cacheable
+    @Cacheable("companyList")
     public Iterable<CompanyEntity> findAll() {
         return companyRepository.findAll();
     }
 
     @Override
-    @Cacheable
+    @Cacheable("findCompany")
     public CompanyEntity findById(int id) {
         return companyRepository.findOne(id);
     }
 
     @Override
+    @CacheEvict(value = {"companyList", "findCompany"}, allEntries = true)
     public CompanyEntity save(CompanyEntity companyEntity) {
         return companyRepository.save(companyEntity);
     }
 
     @Override
+    @CacheEvict(value = {"companyList", "findCompany"}, allEntries = true)
     public CompanyEntity update(CompanyEntity companyEntity) {
         return companyRepository.save(companyEntity);
     }
 
     @Override
+    @CacheEvict(value = {"companyList", "findCompany"}, allEntries = true)
     public void delete(int id) {
         companyRepository.delete(id);
     }
