@@ -4,6 +4,7 @@ import com.example.song.base.BaseException;
 import com.example.song.base.BaseRspEntity;
 import com.example.song.entity.CompanyEntity;
 import com.example.song.service.CompanyService;
+import com.example.song.utils.ViewFlipperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +17,11 @@ public class CompanyController {
     @RequestMapping(value = "/company/{id}", method = RequestMethod.GET)
     public Object findOne(@PathVariable("id") int id) throws BaseException {
         return new BaseRspEntity(companyService.findById(id));
+    }
+
+    @RequestMapping(value = "/company/{page}/{size}", method = RequestMethod.GET)
+    public Object findList(@PathVariable("page") int page, @PathVariable("size") int size) throws BaseException {
+        return new BaseRspEntity(ViewFlipperUtil.getPage(page, size, companyService.findAll()));
     }
 
     @RequestMapping(value = "/company", method = RequestMethod.GET)
