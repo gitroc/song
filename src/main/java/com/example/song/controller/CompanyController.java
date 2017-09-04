@@ -5,13 +5,11 @@ import com.example.song.base.BaseException;
 import com.example.song.base.BaseRspEntity;
 import com.example.song.entity.CompanyEntity;
 import com.example.song.service.CompanyService;
-import com.example.song.utils.ViewFlipperUtil;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -25,22 +23,10 @@ public class CompanyController {
         return new BaseRspEntity(companyService.findById(id));
     }
 
-    @ApiOperation(value = "获取公司列表", notes = "根据请求的page和size获取公司列表")
-    @RequestMapping(value = "/company/{page}/{size}", method = RequestMethod.GET)
-    public Object findList(@PathVariable("page") int page, @PathVariable("size") int size) throws BaseException {
-        return new BaseRspEntity(ViewFlipperUtil.getListByPageSize(page, size, companyService.findAll()));
-    }
-
-    @ApiOperation(value = "获取公司列表", notes = "根据请求的time获取公司列表")
-    @RequestMapping(value = "company/{time}", method = RequestMethod.GET)
-    public Object findList(@PathVariable("time") long time) throws BaseException {
-        return new BaseRspEntity(ViewFlipperUtil.getListByTime(time, companyService.findAll()));
-    }
-
-    @ApiOperation(value = "获取公司列表", notes = "获取公司全部列表")
+    @ApiOperation(value = "获取公司列表", notes = "分页获取公司列表")
     @RequestMapping(value = "/company", method = RequestMethod.GET)
-    public Object findAll() throws BaseException {
-        return new BaseRspEntity(companyService.findAll());
+    public Object findList(@RequestParam("page") int page, @RequestParam("size") int size) throws BaseException {
+        return new BaseRspEntity(companyService.findList(new PageRequest(page, size)));
     }
 
     @ApiOperation(value = "创建公司", notes = "根据实体信息创建公司")

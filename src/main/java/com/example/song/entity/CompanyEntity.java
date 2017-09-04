@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "company")
@@ -27,6 +28,12 @@ public class CompanyEntity implements Serializable {
 
     @Column(name = "date")
     private String date;
+
+    @Column(name = "create_time")
+    private Timestamp createTime;
+
+    @Column(name = "update_time")
+    private Timestamp updateTime;
 
     @Override
     public String toString() {
@@ -79,5 +86,21 @@ public class CompanyEntity implements Serializable {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public Timestamp getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Timestamp createTime) {
+        this.createTime = createTime;
+    }
+
+    public Timestamp getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Timestamp updateTime) {
+        this.updateTime = updateTime;
     }
 }

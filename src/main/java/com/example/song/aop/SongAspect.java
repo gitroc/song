@@ -77,7 +77,13 @@ public class SongAspect {
         logger.info("请求方法 : " + request.getMethod());
         logger.info("IP地址 : " + request.getRemoteAddr());
         logger.info("处理接口 : " + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
-        logger.info("请求参数 : " + JSON.toJSONString(joinPoint.getArgs()));
+
+        if ("POST".equals(request.getMethod())) {
+            logger.info("请求参数 : " + JSON.toJSONString(joinPoint.getArgs()));
+        } else {
+            logger.info("请求参数 : " + request.getQueryString());
+        }
+
     }
 
     @AfterReturning(returning = "ret", pointcut = "song()")
@@ -101,6 +107,6 @@ public class SongAspect {
             return false;
         }
 
-        return true;
+        return false;
     }
 }
