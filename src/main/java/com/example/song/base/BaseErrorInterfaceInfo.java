@@ -4,47 +4,61 @@ public enum BaseErrorInterfaceInfo implements BaseErrorInterface {
     /**
      * 成功
      */
-    SUCCESS("200", "成功"),
+    SUCCESS("200", "ok"),
 
     /**
-     * 没有登录
+     * 资源创建成功
      */
-    NOT_LOGIN("400", "没有登录"),
+    CREAT_SUCC("201", "created succeed"),
 
     /**
-     * 发生异常
+     * 资源更新成功
      */
-    EXCEPTION("401", "发生异常"),
+    UPDATE_SUCC("202", "update succeed"),
 
     /**
-     * 系统错误
+     * 资源删除成功
      */
-    SYS_ERROR("402", "系统错误"),
+    DELETE_SUCC("204", "delete succeed"),
 
     /**
-     * 参数错误
+     * 没有变化
      */
-    PARAMS_ERROR("403", "参数错误 "),
+    UNCHANGED("304", "not modified"),
 
     /**
-     * 不支持或已经废弃
+     * 请求格式错误
      */
-    NOT_SUPPORTED("410", "不支持或已经废弃"),
+    BAD_REQUEST("400", "bad request"),
 
     /**
-     * AuthCode错误
+     * 未授权
      */
-    INVALID_AUTHCODE("444", "无效的AuthCode"),
+    NOT_LOGIN("401", "unauthorized"),
 
     /**
-     * 太频繁的调用
+     * 鉴权成功，但是该用户没有权限
      */
-    TOO_FREQUENT("445", "太频繁的调用"),
+    SEVICE_EXCEPTION("403", "forbidden"),
 
     /**
-     * 未知的错误
+     * 请求的资源不存在
      */
-    UNKNOWN_ERROR("499", "未知错误");
+    SEVICE_ERROR("404", "not found"),
+
+    /**
+     * 该http方法不被允许
+     */
+    SEVICE_NOT_ALLOWED("405", "method not allowed"),
+    /**
+     * 不可指定的请求体 – 只有服务器不能处理实体时使用，比如图像不能被格式化，或者重要字段丢失。
+     */
+    PARAMS_ERROR("422", "请求错误"),
+
+    /**
+     * 标准服务端错误，API开发人员应该尽量避开这种错误
+     */
+    SERVER_ERROR("500", "服务端错误");
 
     BaseErrorInterfaceInfo(String code, String message) {
         this.code = code;

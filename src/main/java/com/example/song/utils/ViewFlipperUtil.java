@@ -10,7 +10,7 @@ import java.util.List;
  * date: 20170901
  */
 public class ViewFlipperUtil {
-    public static <T> List<T> getPage(int page, int size, Iterable<T> all) {
+    public static <T> List<T> getListByPageSize(int page, int size, Iterable<T> all) {
         List<T> list = Lists.newArrayList(all);
 
         if (page <= 0 && size <= 0) {
@@ -31,5 +31,11 @@ public class ViewFlipperUtil {
         }
 
         return list.subList(fromIndex, toIndex);
+    }
+
+    public static <T> List<T> getListByTime(long time, Iterable<T> all) {
+        List<T> list = Lists.newArrayList(all);
+
+        return list;
     }
 }

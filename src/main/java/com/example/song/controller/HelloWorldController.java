@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloWorldController {
     @RequestMapping(value = "/")
     public Object sayHello() throws BaseException {
-        throw new BaseException(BaseErrorInterfaceInfo.EXCEPTION);
+        throw new BaseException(BaseErrorInterfaceInfo.SEVICE_EXCEPTION);
     }
 }

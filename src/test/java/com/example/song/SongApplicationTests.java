@@ -23,7 +23,7 @@ public class SongApplicationTests {
         try {
             assertEquals("Hello,World!", new HelloWorldController().sayHello());
         } catch (Exception e) {
-            throw new BaseException(BaseErrorInterfaceInfo.EXCEPTION);
+            throw new BaseException(BaseErrorInterfaceInfo.SEVICE_EXCEPTION);
         }
     }
 
