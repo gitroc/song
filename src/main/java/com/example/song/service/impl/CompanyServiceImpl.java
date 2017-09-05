@@ -8,7 +8,14 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.sql.Timestamp;
 
 @Service
 @CacheConfig(cacheNames = "company")
@@ -17,9 +24,23 @@ public class CompanyServiceImpl implements CompanyService {
     private CompanyRepository companyRepository;
 
     @Override
-    @Cacheable("companyList")
-    public Iterable<CompanyEntity> findList(Pageable pageable) {
+    @Cacheable("listByPage")
+    public Iterable<CompanyEntity> findListByPage(Pageable pageable) {
         return companyRepository.findAll(pageable).getContent();
+    }
+
+    @Override
+    @Cacheable("listByTime")
+    public Iterable<CompanyEntity> findListByTime(Timestamp updateTime, Pageable pageable) {
+        return companyRepository.findAll(new Specification<CompanyEntity>() {
+            @Override
+            public Predicate toPredicate(Root<CompanyEntity> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+                if (null != updateTime) {
+                    criteriaQuery.where(criteriaBuilder.greaterThan(root.get("updateTime").as(Timestamp.class), updateTime));
+                }
+                return null;
+            }
+        }, pageable).getContent();
     }
 
     @Override

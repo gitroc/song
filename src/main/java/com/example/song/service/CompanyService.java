@@ -3,8 +3,12 @@ package com.example.song.service;
 import com.example.song.entity.CompanyEntity;
 import org.springframework.data.domain.Pageable;
 
+import java.sql.Timestamp;
+
 public interface CompanyService {
-    Iterable<CompanyEntity> findList(Pageable pageable);
+    Iterable<CompanyEntity> findListByPage(Pageable pageable);
+
+    Iterable<CompanyEntity> findListByTime(Timestamp updateTime, Pageable pageable);
 
     CompanyEntity findById(int id);
 
