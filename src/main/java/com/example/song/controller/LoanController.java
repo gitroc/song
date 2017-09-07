@@ -28,12 +28,16 @@ public class LoanController {
     @RequestMapping(value = "/loan", method = RequestMethod.GET)
     public Object findList(@RequestParam(value = "page", required = false, defaultValue = "0") int page,
                            @RequestParam(value = "size", required = false, defaultValue = "10") int size,
-                           @RequestParam(value = "loanLimit", required = false, defaultValue = "") long loanLimit) throws BaseException {
+                           @RequestParam(value = "loanLimit", required = false, defaultValue = "0") long loanLimit) throws BaseException {
         Sort.Order[] orders = new Sort.Order[]{
                 new Sort.Order(Sort.Direction.DESC, "updateTime")
         };
 
-        return new BaseRspEntity(loanService.findListByLimit(loanLimit, new PageRequest(page, size, new Sort(orders))));
+        if (0L == loanLimit) {
+            return new BaseRspEntity(loanService.findListByPage(new PageRequest(page, size, new Sort(orders))));
+        } else {
+            return new BaseRspEntity(loanService.findListByLimit(loanLimit, new PageRequest(page, size, new Sort(orders))));
+        }
     }
 
     @ApiOperation(value = "创建公司", notes = "根据实体信息创建公司")
