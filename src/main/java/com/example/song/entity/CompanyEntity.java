@@ -30,10 +30,10 @@ public class CompanyEntity implements Serializable {
     private String date;
 
     @Column(name = "create_time")
-    private Timestamp createTime;
+    private Timestamp createTime = new Timestamp(System.currentTimeMillis());
 
     @Column(name = "update_time")
-    private Timestamp updateTime;
+    private Timestamp updateTime = new Timestamp(System.currentTimeMillis());
 
     @Override
     public String toString() {

@@ -52,6 +52,7 @@ public class CompanyController {
     }
 
     @ApiOperation(value = "更新公司信息", notes = "根据实体信息更新公司信息")
+    @ApiImplicitParam(name = "company", value = "公司详细实体user", required = true, dataType = "CompanyEntity")
     @RequestMapping(value = "/company", method = RequestMethod.PUT)
     public Object update(@RequestBody CompanyEntity companyEntity) throws BaseException {
         BaseRspEntity baseRspEntity = new BaseRspEntity(BaseErrorInterfaceInfo.UPDATE_SUCC);

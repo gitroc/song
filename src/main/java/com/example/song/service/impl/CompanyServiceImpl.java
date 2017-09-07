@@ -8,13 +8,8 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 import java.sql.Timestamp;
 
 @Service
@@ -24,57 +19,58 @@ public class CompanyServiceImpl implements CompanyService {
     private CompanyRepository companyRepository;
 
     @Override
-    @Cacheable("listByPage")
+    @Cacheable("companyListByPage")
     public Iterable<CompanyEntity> findListByPage(Pageable pageable) {
         return companyRepository.findAll(pageable).getContent();
     }
 
     @Override
-    @Cacheable("listByTime")
+    @Cacheable("companyListByTime")
     public Iterable<CompanyEntity> findListByTime(Timestamp updateTime, Pageable pageable) {
-        return companyRepository.findAll(new Specification<CompanyEntity>() {
-            @Override
-            public Predicate toPredicate(Root<CompanyEntity> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
-                if (null != updateTime) {
-                    criteriaQuery.where(criteriaBuilder.greaterThan(root.get("updateTime").as(Timestamp.class), updateTime));
-                }
-                return null;
-            }
-        }, pageable).getContent();
+        /***
+         * java 8 lambda 表达式, Roc 第二次试用
+         */
+        return companyRepository.findAll(
+                (root, criteriaQuery, criteriaBuilder) -> {
+                    if (null != updateTime) {
+                        criteriaQuery.where(criteriaBuilder.greaterThan(root.get("updateTime").as(Timestamp.class), updateTime));
+                    }
+                    return null;
+                }, pageable).getContent();
     }
 
     @Override
-    @Cacheable("oneCompany")
+    @Cacheable("companyById")
     public CompanyEntity findById(int id) {
         return companyRepository.findOne(id);
     }
 
     @Override
-    @CacheEvict(value = {"companyList", "oneCompany"}, allEntries = true)
+    @CacheEvict(value = {"companyListByPage", "companyListByTime", "companyById"}, allEntries = true)
     public CompanyEntity save(CompanyEntity companyEntity) {
         return companyRepository.save(companyEntity);
     }
 
     @Override
-    @CacheEvict(value = {"companyList", "oneCompany"}, allEntries = true)
+    @CacheEvict(value = {"companyListByPage", "companyListByTime", "companyById"}, allEntries = true)
     public Iterable<CompanyEntity> save(Iterable<CompanyEntity> list) {
         return companyRepository.save(list);
     }
 
     @Override
-    @CacheEvict(value = {"companyList", "oneCompany"}, allEntries = true)
+    @CacheEvict(value = {"companyListByPage", "companyListByTime", "companyById"}, allEntries = true)
     public CompanyEntity update(CompanyEntity companyEntity) {
         return companyRepository.save(companyEntity);
     }
 
     @Override
-    @CacheEvict(value = {"companyList", "oneCompany"}, allEntries = true)
+    @CacheEvict(value = {"companyListByPage", "companyListByTime", "companyById"}, allEntries = true)
     public Iterable<CompanyEntity> update(Iterable<CompanyEntity> list) {
         return companyRepository.save(list);
     }
 
     @Override
-    @CacheEvict(value = {"companyList", "oneCompany"}, allEntries = true)
+    @CacheEvict(value = {"companyListByPage", "companyListByTime", "companyById"}, allEntries = true)
     public void delete(int id) {
         companyRepository.delete(id);
     }
