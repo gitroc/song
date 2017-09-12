@@ -27,7 +27,7 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-eureka</artifactId>
+            <artifactId>spring-cloud-starter-consul-discovery</artifactId>
         </dependency>
         <!-- Spring Boot web依赖 -->
         <dependency>
@@ -54,12 +54,6 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-        </dependency>
-        <!-- alibaba druid依赖 -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>1.0.25</version>
         </dependency>
         <!--spring boot 配置处理器 -->
         <dependency>
@@ -116,6 +110,11 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
             <version>2.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-actuator</artifactId>
+            <version>1.5.4.RELEASE</version>
         </dependency>
     </dependencies>
     <dependencyManagement>

@@ -12,20 +12,26 @@ user:
 
 eureka:
   instance:
+    host: localhost
     status-page-url: http://localhost:${server.port}/swagger-ui.html
     lease-expiration-duration-in-seconds: 30
     lease-renewal-interval-in-seconds: 10
   client:
-    registerWithEureka: true
-    fetchRegistry: true
+    registerWithEureka: false
+    fetchRegistry: false
     service-url:
       defaultZone: http://localhost:10001/eureka/
 
 spring:
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        instance-id: eureka-song
   application:
     name: eureka-song
   datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/springbootdb?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: root
@@ -78,5 +84,6 @@ spring:
     suffix: .ftl
 server:
   port: 8080
+
 
 
