@@ -17,14 +17,4 @@ public class SongApplicationTests {
     @Test
     public void contextLoads() {
     }
-
-    @Test
-    public void testSayHello() throws BaseException{
-        try {
-            assertEquals("Hello,World!", new HelloWorldController().sayHello());
-        } catch (Exception e) {
-            throw new BaseException(BaseErrorInterfaceInfo.SEVICE_EXCEPTION);
-        }
-    }
-
 }

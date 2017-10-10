@@ -12,30 +12,30 @@ user:
 
 eureka:
   instance:
-    host: localhost
+#    host: localhost
     status-page-url: http://localhost:${server.port}/swagger-ui.html
     lease-expiration-duration-in-seconds: 30
     lease-renewal-interval-in-seconds: 10
   client:
-    registerWithEureka: false
-    fetchRegistry: false
+    registerWithEureka: true
+    fetchRegistry: true
     service-url:
       defaultZone: http://localhost:10001/eureka/
 
 spring:
-  cloud:
-    consul:
-      host: localhost
-      port: 8500
-      discovery:
-        instance-id: eureka-song
+#  cloud:
+#    consul:
+#      host: localhost
+#      port: 8500
+#      discovery:
+#        instance-id: eureka-song
   application:
     name: eureka-song
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/springbootdb?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&useSSL=false
-    username: root
-    password: root
+    url: jdbc:mysql://172.16.11.120:3306/zjg_finance?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: dev
+    password: dev@xlh.com
     #最大活跃数
     maxActive: 20
     #初始化数量
